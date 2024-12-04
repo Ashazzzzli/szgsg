@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #FFC0CB; /* Soft pink background */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: red;
+            text-shadow: 5px 5px 15px black; /* Bigger black glow */
+            font-size: 4rem; /* Larger font size */
+            margin-bottom: 30px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        #clickable {
+            font-size: 1.5rem; /* Larger size for visibility */
+            color: #FF4040; /* Balanced red color */
+            text-shadow: 1px 1px black; /* Black stroke effect */
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .bubble {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px black;
+            opacity: 0;
+            animation: fadeInOut 2s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+        }
+
+        .kiss {
+            position: absolute;
+            font-size: 25px;
+            font-weight: bold;
+            color: red;
+            text-shadow: 2px 2px 4px black;
+            opacity: 0;
+            animation: kissEffect 1.5s forwards;
+        }
+
+        @keyframes kissEffect {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>HAPPY BIRTHDAY BABY!</h1>
+    <div id="clickable">Click here!</div>
+
+    <script>
+        const clickable = document.getElementById('clickable');
+        const messages = [
+            "I love you so much",
+            "You're 17 now holy crap",
+            "HAPPY 17TH BIRTHDAY",
+            "GOD I LOVE YOU",
+            "You're so perfect",
+            "It's been more than a year since we met omg",
+            "We're getting old",
+            "A year closer to marrying you",
+            "I fucking love you so fucking much",
+            "Marry me",
+            "Kiss me",
+            "You're my everything",
+            "I'm so lucky to have you",
+            "You're the best",
+            "You're so gorgeous",
+            "My baby",
+            "You're so fucking amazing and perfect",
+            "I love you"
+        ];
+
+        clickable.addEventListener('click', () => {
+            // Generate at least 4 kiss bubbles per click
+            for (let i = 0; i < 4; i++) {
+                createKissBubble();
+            }
+        });
+
+        function createKissBubble() {
+            const kiss = document.createElement('div');
+            kiss.classList.add('kiss');
+            kiss.textContent = 'kiss';
+            kiss.style.left = `${Math.random() * window.innerWidth}px`;
+            kiss.style.top = `${Math.random() * window.innerHeight}px`;
+            document.body.appendChild(kiss);
+            setTimeout(() => kiss.remove(), 1500);
+        }
+
+        function createMessageBubble(text, color) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.textContent = text;
+            bubble.style.color = color;
+            bubble.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
+            bubble.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            document.body.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 2000);
+        }
+
+        function showMessageBubbles() {
+            const colors = ["#00FF00", "#0000FF"]; // Green and blue
+            for (let i = 0; i < 8; i++) {
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                const randomColor = colors[i % 2]; // Alternate between green and blue
+                createMessageBubble(randomMessage, randomColor);
+            }
+        }
+
+        // Show 8 message bubbles every 2 seconds after the page loads
+        setInterval(showMessageBubbles, 2000);
+        
+    </script>
+</body>
+</html>
